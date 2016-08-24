@@ -3,27 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="cool.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="base.css">
     <title>Vic's Learning Journal</title>
   </head>
-  <main>
+  <body>
     <header>
-      <section>
-        <a href="home.html">Home</a>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <section class="container">
+          <a class="navbar-brand" href="home.html">Home</a>
+        </section>
+      </nav>
     </header>
-    <body>
+    <main>
       <section>
         <form action="" method="POST">
-          <input type="text" name="title" placeholder="Title"><br>
-          <textarea name="entry" placeholder="Entry"></textarea>
-          <input type="submit" value="Save">
+          <div class="form-group">
+            <h2>Title</h2>
+            <input type="text" class="form-control" name="title" placeholder="Entry Title"><br>
+            <h2>Entry</h2>
+            <textarea name="entry" class="form-control" rows="10" placeholder="Entry"></textarea>
+            <input class="btn btn-primary" type="submit" value="Save">
+          </div>
         </form>
       </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    </body>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </main>
     <footer class="footinfo">Vic's Learning Journal | 2016
     </footer>
-  </main>
+  </body>
 </html>
