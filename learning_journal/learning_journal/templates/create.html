@@ -4,25 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="base.css">
+    <link type="text/css" rel="stylesheet" href="/Users/VMB/cf/Python401/week3/learning-journal/learning_journal/learning_journal/static/base.css">
     <title>Vic's Learning Journal</title>
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-inverse navbar-fixed-top">
-        <section class="container">
-          <a class="navbar-brand" href="home.html">Home</a>
-        </section>
-      </nav>
+      <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <section class="container">
+            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="/create">Entry +</a>
+          </section>
+        </nav>
+      </div>
     </header>
-    <main>
+    <main class="container" style="padding-top: 70px">
       <section>
         <form action="" method="POST">
           <div class="form-group col-xs-10">
             <h2>Title</h2>
             <input type="text" class="form-control col-lg" name="title" placeholder="Entry Title"><br>
             <h2>Entry</h2>
-            <textarea name="entry" class="form-control col-lg" rows="10" placeholder="Entry"></textarea>
+            <textarea name="entry" class="form-control col-lg" rows="10" placeholder="Add content here..."></textarea>
             <input class="btn btn-primary" type="submit" value="Save">
           </div>
         </form>
@@ -30,7 +33,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </main>
-    <footer class="footinfo">Vic's Learning Journal | 2016
+    <footer class="footinfo container">Vic's Learning Journal | 2016
     </footer>
   </body>
 </html>
