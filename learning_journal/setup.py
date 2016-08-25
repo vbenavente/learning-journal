@@ -11,6 +11,8 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
 requires = [
     'pyramid',
     'pyramid_jinja2',
+    'ipython',
+    'pyramid_ipython',
     'pyramid_debugtoolbar',
     'waitress',
     ]
@@ -19,6 +21,7 @@ tests_require = [
     'WebTest >= 1.3.1',  # py3 compat
     'pytest',  # includes virtualenv
     'pytest-cov',
+    'pytest-watch',
     'tox',
     ]
 
