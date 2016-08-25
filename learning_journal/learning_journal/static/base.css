@@ -2,7 +2,7 @@ body {
   position: relative;
   background-color: white;
   color: black;
-  padding-top: 70px;
+  padding-top: 30px;
   padding-left: 15px;
 }
 
@@ -26,12 +26,12 @@ body {
     line-height: 20px;
 }
 
-.container {
-  margin: 0px;
+main {
+  overflow: hidden;
 }
 
-main {
-  padding-top: 20px;
+main .container{
+  padding-top: 30px;
 }
 
 a {
@@ -50,8 +50,9 @@ textarea {
 
 footer {
   position: fixed;
-  left: 0px;
-  bottom: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 30px;
   width: 100%;
   padding-left: 15px;
