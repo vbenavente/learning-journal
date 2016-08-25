@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+python learning_journal/setup.py develop
+python learning_journal/runapp.py
