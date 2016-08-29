@@ -1,6 +1,6 @@
 {% extends "index.jinja2" %}
 {% block body %}
-  <form action="" method="POST">
+  <form action="{{ request.route_url('edit') }}" method="POST">
     <div class="form-group col-xs-10">
       <h2>Title</h2>
       <input type="text" class="form-control" name="title" value="{{ title }}"><br>

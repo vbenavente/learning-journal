@@ -17,21 +17,17 @@ requires = [
     'transaction',
     'zope.sqlalchemy',
     'waitress',
-    'ipython',
-    'pyramid_ipython'
     ]
 
 tests_require = [
     'WebTest >= 1.3.1',  # py3 compat
     'pytest',  # includes virtualenv
     'pytest-cov',
-    'pytest-watch',
-    'tox',
     ]
 
-setup(name='learning_journal',
+setup(name='vic_learning_journal',
       version='0.0',
-      description='learning_journal',
+      description='vic_learning_journal',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
           "Programming Language :: Python",
@@ -39,10 +35,10 @@ setup(name='learning_journal',
           "Topic :: Internet :: WWW/HTTP",
           "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
       ],
-      author='Victor Benavente',
-      author_email='vbenavente@hotmail.com',
+      author='',
+      author_email='',
       url='',
-      keywords='web wsgi bfg pyramid pylons',
+      keywords='web wsgi bfg pylons pyramid',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
@@ -52,7 +48,8 @@ setup(name='learning_journal',
       install_requires=requires,
       entry_points="""\
       [paste.app_factory]
-      main = learning_journal:main
+      main = vic_learning_journal:main
       [console_scripts]
-      initialize_db = learning_journal.scripts.initializedb: main""",
+      initialize_vic_learning_journal_db = vic_learning_journal.scripts.initializedb:main
+      """,
       )
