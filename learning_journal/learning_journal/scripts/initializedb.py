@@ -1,6 +1,6 @@
 import os
 import sys
-import transaction
+# import transaction
 
 from pyramid.paster import (
     get_appsettings,
@@ -38,8 +38,8 @@ def main(argv=sys.argv):
 
     session_factory = get_session_factory(engine)
 
-    with transaction.manager:
-        dbsession = get_tm_session(session_factory, transaction.manager)
-
-        model = MyModel(name='one', value=1)
-        dbsession.add(model)
+    # with transaction.manager:
+    #     dbsession = get_tm_session(session_factory, transaction.manager)
+    #
+    #     model = MyModel(name='one', value=1)
+    #     dbsession.add(model)
