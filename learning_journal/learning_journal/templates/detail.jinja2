@@ -2,7 +2,7 @@
 {% block body %}
   <article>
     <h2 class="entrytitle">{{ title }}</h2>
-      <p class="timestamp">{{ creation_date }} 1</p>
+      <p class="timestamp">{{ creation_date }} </p>
       <p class="entry">{{ body }}</p>
       <p class="editentry"><a class="btn btn-primary" href="{{ request.route_url("update", id=id) }}">Edit</a></p>
   </article>
