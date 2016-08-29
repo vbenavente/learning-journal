@@ -13,10 +13,19 @@ def test_home_view():
 def test_detail_view():
     from .views import detail_view
     request = testing.DummyRequest()
-    request.id = 1
-    import pdb; pdb.set_trace()
+    request.matchdict = {'id': '1'}
+    # for entry in ENTRIES:
+    #     if entry['id'] == int(request.matchdict['id']):
+    #         return entry
     info = detail_view(request)
-    assert "title" in info
+    assert "body" in info
+
+
+def test_create_view():
+    from .views import create_view
+    request = testing.DummyRequest()
+    info = create_view(request)
+    assert "entries" in info
 
 # -------Functional Tests----------
 
@@ -31,7 +40,6 @@ def testapp():
 
 def test_layout_root(testapp):
     response = testapp.get('/', status=200)
-    print('res body', response.body)
     assert b'Vic Week 2 Day 5' in response.body
 
 
@@ -41,6 +49,8 @@ def test_root_contents(testapp):
     response = testapp.get('/', status=200)
     html = response.html
     assert len(ENTRIES) == len(html.findAll("article"))
+
+
 # class ViewTests(unittest.TestCase):
 #     def setUp(self):
 #         self.config = testing.setUp()
