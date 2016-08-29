@@ -1,0 +1,14 @@
+{% extends "index.jinja2" %}
+{% block body %}
+  {% if entries %}
+    {% for entry in entries %}
+      <article>
+        <h2 class="entrytitle">
+          <a href="{{ request.route_url('detail', id=entry.id) }}">{{ entry.title }}</a>
+        </h2>
+        <p class="timestamp">Created {{ entry.creation_date }}</p>
+        <p class="editentry"><a class="btn btn-primary" href="{{ request.route_url('update', id=entry.id) }}">Edit</a></p>
+      </article>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
