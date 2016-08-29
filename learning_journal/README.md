@@ -35,3 +35,7 @@ learning_journal/views.py                    14      0   100%
 TOTAL                                        28      0   100%
 
 12 passed in 0.88 seconds
+
+## Coverage output for step4 branch
+
+Will go here, once I have tests passing
