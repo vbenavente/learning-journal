@@ -14,9 +14,6 @@ def test_detail_view():
     from .views import detail_view
     request = testing.DummyRequest()
     request.matchdict = {'id': '1'}
-    # for entry in ENTRIES:
-    #     if entry['id'] == int(request.matchdict['id']):
-    #         return entry
     info = detail_view(request)
     assert "body" in info
 
@@ -26,6 +23,14 @@ def test_create_view():
     request = testing.DummyRequest()
     info = create_view(request)
     assert "entries" in info
+
+
+def test_update_view():
+    from .views import update_view
+    request = testing.DummyRequest()
+    request.matchdict = {'id': '1'}
+    info = update_view(request)
+    assert "body" in info
 
 # -------Functional Tests----------
 
