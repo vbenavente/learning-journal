@@ -96,4 +96,5 @@ ENV/
 .ropeproject
 
 # database
+learning_journal.sqlite
 *.sqlite
