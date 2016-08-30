@@ -3,7 +3,7 @@ import os
 from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(here, 'README.txt')) as f:
+with open(os.path.join(here, 'README.md')) as f:
     README = f.read()
 with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
@@ -54,5 +54,5 @@ setup(name='learning_journal',
       [paste.app_factory]
       main = learning_journal:main
       [console_scripts]
-      initialize_db = learning_journal.scripts.initializedb: main""",
+      initialize_db = learning_journal.scripts.initializedb:main""",
       )
