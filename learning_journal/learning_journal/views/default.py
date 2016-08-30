@@ -1,6 +1,8 @@
 from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPNotFound
+from pyramid.httpexceptions import HTTPFound
+import datetime
 
 from sqlalchemy.exc import DBAPIError
 
@@ -38,15 +40,20 @@ def edit_view(request):
 
 @view_config(route_name='create', renderer='../templates/create.jinja2')
 def create_view(request):
+    # title = body = error = ''
+    # if request.method == 'POST':
+    #     title = request.params.get('title', '')
+    #     body = request.params.get('body', '')
+    #     if not body or not title:
+    #         error = "title and body are both required"
     if request.method == "POST":
         new_title = request.POST["title"]
         new_body = request.POST["body"]
-        new_creation_date = request.POST["creation_date"]
+        new_creation_date = datetime.datetime.utcnow()
         new_entry = MyEntry(title=new_title, body=new_body, creation_date=new_creation_date)
         request.dbsession.add(new_entry)
-        return {"entry": {"title": new_entry.title}}
-    return{"entry": {"title": "this worked"}}
-
+        return HTTPFound(location=request.route_url('home'))  # credit Cris Ewing
+    return{}
 
 
 db_err_msg = """\
