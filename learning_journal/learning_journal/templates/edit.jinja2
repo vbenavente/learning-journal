@@ -6,7 +6,7 @@
       <input type="text" class="form-control" name="title" value="{{ entry.title }}"><br>
       <h2>Entry</h2>
       <textarea type="text" class="form-control" name="body" rows="10">{{ entry.body }}</textarea>
-      <input class="btn btn-primary" type="submit" value="Save" action="{{ request.route_url('home') }}" method="GET">
+      <input class="btn btn-primary" type="submit" value="Save">
     </div>
   </form>
 {% endblock %}

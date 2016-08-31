@@ -35,6 +35,8 @@ def edit_view(request):
     if request.method == "POST":
         entry.title = request.POST["title"]
         entry.body = request.POST["body"]
+        entry = MyEntry(title=entry.title, body=entry.body, creation_date=entry.creation_date)
+        return HTTPFound(location=request.route_url('home'))
     return {"entry": entry}
 
 
