@@ -72,6 +72,7 @@ def test_home_view(dummy_request, new_session):
     from .views.default import home_view
     new_session.add(MyEntry(title="test", body="this is a test", creation_date=datetime.datetime.utcnow()))
     new_session.flush()
+    import pdb; pdb.set_trace()
     info = home_view(dummy_request)
     assert "entries" in info
 
