@@ -1,3 +1,0 @@
-[run]
-source = vic_learning_journal
-omit = vic_learning_journal/test*

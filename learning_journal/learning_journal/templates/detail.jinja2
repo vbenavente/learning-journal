@@ -3,7 +3,7 @@
   <article>
     <h2 class="entrytitle">{{ entry.title }}</h2>
       <p class="timestamp">{{ entry.creation_date }} </p>
-      <p class="entry">{{ entry.body }}</p>
+      <div class="entry">{{ entry.body }}</div>
       <p class="editentry"><a class="btn btn-primary" href="{{ request.route_url("update", id=entry.id) }}">Edit</a></p>
   </article>
 {% endblock %}

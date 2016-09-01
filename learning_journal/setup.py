@@ -16,9 +16,7 @@ requires = [
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
-    'waitress',
-    'ipython',
-    'pyramid_ipython'
+    'waitress'
     ]
 
 tests_require = [
@@ -28,6 +26,11 @@ tests_require = [
     'pytest-watch',
     'tox',
     ]
+
+development_extra = [
+    'ipython',
+    'pyramid_ipython'
+]
 
 setup(name='learning_journal',
       version='0.0',

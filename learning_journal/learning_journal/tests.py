@@ -138,7 +138,7 @@ def test_layout_root_edit(testapp, populated_db):
 
 def test_layout_root_detail(testapp, populated_db):
     """Test layout root of detail route."""
-    response = testapp.get('/1', status=200)
+    response = testapp.get('/detail/1', status=200)
     html = response.html
     assert html.find("p")
 
@@ -150,7 +150,11 @@ def test_root_contents_home(testapp, populated_db):
     assert len(html.findAll("article")) == 1
 
 
+def test_root_contents_create_notitle(testapp):
+    """Test no title returns dictionary with error."""
+
+
 def test_root_contents_detail(testapp, populated_db):
     """Test contents of detail page contains <p> in detail content."""
-    response = testapp.get('/1', status=200)
+    response = testapp.get('/detail/1', status=200)
     assert b"James is being awesome." in response.body

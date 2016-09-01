@@ -46,5 +46,6 @@ def main(argv=sys.argv):
 
         for entry in ENTRIES:
 
-            entry = MyEntry(title=entry["title"], body=entry["body"], creation_date=datetime.strptime(entry["creation_date"], '%b %d, %Y'))
+            entry = MyEntry(
+                title=entry["title"], body=entry["body"], creation_date=datetime.strptime(entry["creation_date"], '%b %d, %Y'))
             dbsession.add(entry)

@@ -11,7 +11,7 @@ from ..models import MyEntry
 
 @view_config(route_name="home", renderer="../templates/home.jinja2")
 def home_view(request):
-    query = request.dbsession.query(MyEntry)
+    query = request.dbsession.query(MyEntry).order_by(MyEntry.creation_date.desc())
     entries = query.all()
     return {"entries": entries}
 
@@ -20,6 +20,8 @@ def home_view(request):
 def detail_view(request):
     entry_id = int(request.matchdict['id'])
     entry = request.dbsession.query(MyEntry).get(entry_id)
+    if entry is None:
+        raise HTTPNotFound
     return {"entry": entry}
 
 
@@ -39,12 +41,12 @@ def edit_view(request):
 
 @view_config(route_name='create', renderer='../templates/create.jinja2')
 def create_view(request):
-    # title = body = error = ''
-    # if request.method == 'POST':
-    #     title = request.params.get('title', '')
-    #     body = request.params.get('body', '')
-    #     if not body or not title:
-    #         error = "title and body are both required"
+    title = body = error = ''
+    if request.method == 'POST':
+        title = request.params.get('title', '')
+        body = request.params.get('body', '')
+        if not body or not title:
+            error = "title and body are both required"
     if request.method == "POST":
         new_title = request.POST["title"]
         new_body = request.POST["body"]
@@ -52,7 +54,7 @@ def create_view(request):
         new_entry = MyEntry(title=new_title, body=new_body, creation_date=new_creation_date)
         request.dbsession.add(new_entry)
         return HTTPFound(location=request.route_url('home'))  # credit Cris Ewing
-    return{}
+    return{"title": title, "body": body, "error": error}
 
 
 db_err_msg = """\
