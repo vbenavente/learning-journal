@@ -3,7 +3,7 @@ from sqlalchemy import (
     Index,
     Integer,
     UnicodeText,
-    Date
+    DateTime
 )
 
 from .meta import Base
@@ -14,7 +14,7 @@ class MyEntry(Base):
     id = Column(Integer, primary_key=True)
     title = Column(UnicodeText)
     body = Column(UnicodeText)
-    creation_date = Column(Date)
+    creation_date = Column(DateTime)
 
 
 # Index('my_index', MyEntry.title, unique=True, mysql_length=255)

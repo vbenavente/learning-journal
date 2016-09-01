@@ -11,11 +11,8 @@ from ..models import MyEntry
 
 @view_config(route_name="home", renderer="../templates/home.jinja2")
 def home_view(request):
-    try:
-        query = request.dbsession.query(MyEntry)
-        entries = query.all()
-    except DBAPIError:
-        return Response(db_err_msg, content_type="text/plain", status=500)
+    query = request.dbsession.query(MyEntry)
+    entries = query.all()
     return {"entries": entries}
 
 
