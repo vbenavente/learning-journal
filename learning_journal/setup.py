@@ -11,10 +11,12 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
 requires = [
     'pyramid',
     'pyramid_jinja2',
-    'ipython',
-    'pyramid_ipython',
     'pyramid_debugtoolbar',
-    'waitress',
+    'pyramid_tm',
+    'SQLAlchemy',
+    'transaction',
+    'zope.sqlalchemy',
+    'waitress'
     ]
 
 tests_require = [
@@ -24,6 +26,11 @@ tests_require = [
     'pytest-watch',
     'tox',
     ]
+
+development_extra = [
+    'ipython',
+    'pyramid_ipython'
+]
 
 setup(name='learning_journal',
       version='0.0',
@@ -38,7 +45,7 @@ setup(name='learning_journal',
       author='Victor Benavente',
       author_email='vbenavente@hotmail.com',
       url='',
-      keywords='web pyramid pylons',
+      keywords='web wsgi bfg pyramid pylons',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
@@ -49,5 +56,6 @@ setup(name='learning_journal',
       entry_points="""\
       [paste.app_factory]
       main = learning_journal:main
-      """,
+      [console_scripts]
+      initialize_db = learning_journal.scripts.initializedb:main""",
       )
