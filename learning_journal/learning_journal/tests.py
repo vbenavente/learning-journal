@@ -14,6 +14,7 @@ from .models.meta import Base
 
 DB_SETTINGS = {'sqlalchemy.url': 'sqlite:////tmp/testme.sqlite'}
 
+
 @pytest.fixture(scope="session")
 def sqlengine(request):
     """Set up sql engine."""
@@ -58,7 +59,6 @@ def populated_db(request, sqlengine):
             session.query(MyEntry).delete()
 
     request.addfinalizer(teardown)
-
 
 
 @pytest.fixture()
@@ -148,20 +148,6 @@ def test_root_contents_home(testapp, populated_db):
     response = testapp.get('/', status=200)
     html = response.html
     assert len(html.findAll("article")) == 1
-
-
-# def test_root_contents_create(testapp):
-#     """Test contents of root page contains <textarea> in create content."""
-#     from .views.default import create_view
-#     response = testapp.get('/create', status=200)
-#     assert create_view(response) == {}
-
-
-# def test_root_contents_edit(testapp, populated_db):
-#     """Test contents of edit page contains <input> in edit content."""
-#     response = testapp.get('/edit/1', status=200)
-#     html = response.html
-#     assert html.find("input")
 
 
 def test_root_contents_detail(testapp, populated_db):
