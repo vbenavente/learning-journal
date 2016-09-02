@@ -2,3 +2,4 @@
 set -e
 python learning_journal/setup.py develop
 python learning_journal/runapp.py
+initialize_db production.ini
