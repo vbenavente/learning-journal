@@ -1,0 +1,12 @@
+{% extends "index.jinja2" %}
+{% block body %}
+  <form action="{{ request.route_url('update', id=entry.id) }}" method="POST">
+    <div class="form-group col-xs-10">
+      <h2>Title</h2>
+      <input type="text" class="form-control" name="title" value="{{ entry.title }}"><br>
+      <h2>Entry</h2>
+      <textarea type="text" class="form-control" name="body" rows="10">{{ entry.body }}</textarea>
+      <input class="btn btn-primary" type="submit" value="Save">
+    </div>
+  </form>
+{% endblock %}

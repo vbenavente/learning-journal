@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+python learning_journal/setup.py develop
+# initialize_db learning_journal/production.ini
+python learning_journal/runapp.py

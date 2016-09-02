@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="{{ request.static_path("learning_journal:static/base.css") }} charset="utf-8">
+    <title>Vic's Learning Journal</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <section class="container">
+            <a class="navbar-brand" href="{{ request.route_url('home') }}">Home</a>
+            <a class="navbar-brand" href="{{ request.route_url('create') }}">Entry +</a>
+          </section>
+        </nav>
+      </div>
+    </header>
+    <main class="container" style="padding-top: 70px">
+      <h1>Vic's Python Learning Journal</h1>
+      <section>
+        {% block body %}
+        {% endblock %}
+      </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    </main>
+    <footer class="footinfo container">Vic's Learning Journal | 2016
+    </footer>
+  </body>
+</html>
