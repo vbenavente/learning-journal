@@ -1,4 +1,5 @@
 import pytest
+import os
 import transaction
 import datetime
 
@@ -12,10 +13,14 @@ from .models import (
 )
 from .models.meta import Base
 
-DB_SETTINGS = {'sqlalchemy.url': 'sqlite:////tmp/testme.sqlite'}
+DB_SETTINGS = {'sqlalchemy.url': 'postgres://VMB@localhost:5432/mockdb_ljtesting'}
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
+def setup_test_env():
+    os.environ["DATABASE_URL"] = 'postgres://VMB@localhost:5432/mockdb_ljtesting'
+
+@pytest.fixture(scope="function")
 def sqlengine(request):
     """Set up sql engine."""
     config = testing.setUp(settings=DB_SETTINGS)
@@ -52,7 +57,7 @@ def populated_db(request, sqlengine):
     session = get_tm_session(session_factory, transaction.manager)
 
     with transaction.manager:
-        session.add(MyEntry(title="Vic Week 2 Day 5", body="This is a test entry, James is being awesome.", creation_date=datetime.datetime.utcnow()))
+        session.add(MyEntry(title="Test Title", body="This is a test entry, James is being awesome.", creation_date=datetime.datetime.utcnow()))
 
     def teardown():
         with transaction.manager:
@@ -109,7 +114,7 @@ def test_edit_view(new_session):
 
 
 @pytest.fixture()
-def testapp(sqlengine):
+def testapp(sqlengine, setup_test_env):
     """Setup TestApp."""
     from learning_journal import main
     app = main({}, **DB_SETTINGS)
@@ -120,7 +125,7 @@ def testapp(sqlengine):
 def test_layout_root_home(testapp, populated_db):
     """Test layout root of home route."""
     response = testapp.get('/', status=200)
-    assert b'Vic Week 2 Day 5' in response.body
+    assert b'Test Title' in response.body
 
 
 def test_layout_root_create(testapp):
@@ -150,11 +155,7 @@ def test_root_contents_home(testapp, populated_db):
     assert len(html.findAll("article")) == 1
 
 
-def test_root_contents_create_notitle(testapp):
-    """Test no title returns dictionary with error."""
-
-
-def test_root_contents_detail(testapp, populated_db):
+def test_root_contents_detail(testapp, populated_db, new_session):
     """Test contents of detail page contains <p> in detail content."""
     response = testapp.get('/detail/1', status=200)
     assert b"James is being awesome." in response.body
