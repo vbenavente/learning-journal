@@ -54,21 +54,18 @@ def create_view(request):
         new_entry = MyEntry(title=new_title, body=new_body, creation_date=new_creation_date)
         request.dbsession.add(new_entry)
         return HTTPFound(location=request.route_url('home'))  # credit Cris Ewing
-    return{"title": title, "body": body, "error": error}
+    return {"title": title, "body": body, "error": error}
 
 
-db_err_msg = """\
-Pyramid is having a problem using your SQL database.  The problem
-might be caused by one of the following things:
-
-1.  You may need to run the "initialize_learning_journal_db" script
-    to initialize your database tables.  Check your virtual
-    environment's "bin" directory for this script and try to run it.
-
-2.  Your database server may not be running.  Check that the
-    database server referred to by the "sqlalchemy.url" setting in
-    your "development.ini" file is running.
-
-After you fix the problem, please restart the Pyramid application to
-try it again.
-"""
+@view_config(route_name='login', renderer='../templates/login.jinja2')
+def login_view(request):
+    username = password = error = ""
+    if request.method == "POST":
+        username = request.params.get("username", "")
+        password = request.params.get("password", "")
+        if not username or not password:
+            error = "You must enter a username and password"
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+    return {"error": error}
