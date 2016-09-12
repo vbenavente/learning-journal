@@ -13,12 +13,12 @@ from .models import (
 )
 from .models.meta import Base
 
-DB_SETTINGS = {'sqlalchemy.url': 'postgres://VMB@localhost:5432/mockdb_ljtesting'}
+DB_SETTINGS = {'sqlalchemy.url': 'postgres://Victor@localhost:5432/mockdb_ljtesting'}
 
 
 @pytest.fixture(scope="function")
 def setup_test_env():
-    os.environ["DATABASE_URL"] = 'postgres://VMB@localhost:5432/mockdb_ljtesting'
+    os.environ["DATABASE_URL"] = 'postgres://Victor@localhost:5432/mockdb_ljtesting'
 
 @pytest.fixture(scope="function")
 def sqlengine(request):
