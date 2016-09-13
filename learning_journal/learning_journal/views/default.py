@@ -2,21 +2,20 @@ from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPNotFound
 from pyramid.httpexceptions import HTTPFound
+from pyramid.security import NO_PERMISSION_REQUIRED
 import datetime
-
-from sqlalchemy.exc import DBAPIError
 
 from ..models import MyEntry
 
 
-@view_config(route_name="home", renderer="../templates/home.jinja2")
+@view_config(route_name="home", renderer="../templates/home.jinja2", permission=NO_PERMISSION_REQUIRED)
 def home_view(request):
     query = request.dbsession.query(MyEntry).order_by(MyEntry.creation_date.desc())
     entries = query.all()
     return {"entries": entries}
 
 
-@view_config(route_name='detail', renderer='../templates/detail.jinja2')
+@view_config(route_name='detail', renderer='../templates/detail.jinja2', permission=NO_PERMISSION_REQUIRED)
 def detail_view(request):
     entry_id = int(request.matchdict['id'])
     entry = request.dbsession.query(MyEntry).get(entry_id)
@@ -25,7 +24,7 @@ def detail_view(request):
     return {"entry": entry}
 
 
-@view_config(route_name='update', renderer='../templates/edit.jinja2')
+@view_config(route_name='update', renderer='../templates/edit.jinja2', permission=NO_PERMISSION_REQUIRED)
 def edit_view(request):
     entry_id = int(request.matchdict['id'])
     entry = request.dbsession.query(MyEntry).get(entry_id)
@@ -39,7 +38,7 @@ def edit_view(request):
     return {"entry": entry}
 
 
-@view_config(route_name='create', renderer='../templates/create.jinja2')
+@view_config(route_name='create', renderer='../templates/create.jinja2', permission=NO_PERMISSION_REQUIRED)
 def create_view(request):
     title = body = error = ''
     if request.method == 'POST':
@@ -57,7 +56,7 @@ def create_view(request):
     return {"title": title, "body": body, "error": error}
 
 
-@view_config(route_name='login', renderer='../templates/login.jinja2')
+@view_config(route_name='login', renderer='../templates/login.jinja2', permission=NO_PERMISSION_REQUIRED)
 def login_view(request):
     username = password = error = ""
     if request.method == "POST":
@@ -69,3 +68,13 @@ def login_view(request):
         username = request.POST["username"]
         password = request.POST["password"]
     return {"error": error}
+
+
+# @view_config(route_name='private', renderer='string', permission='secret')
+# def private(request):
+#     return "I am a private view"
+#
+
+# @view_config(route_name='public', renderer='string')
+# def public(request):
+#     return "I am a public view"

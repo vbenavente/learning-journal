@@ -5,3 +5,5 @@ def includeme(config):
     config.add_route('update', '/edit/{id:\d+}')
     config.add_route('create', '/create')
     config.add_route('login', '/login')
+    config.add_route('private', '/edit/{id:\d+}')
+    config.add_route('public', '/')
