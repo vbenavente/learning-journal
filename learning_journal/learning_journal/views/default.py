@@ -3,19 +3,24 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPNotFound
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import NO_PERMISSION_REQUIRED
+from pyramid.security import remember, forget
+from learning_journal.security import check_credentials
 import datetime
+import os
 
 from ..models import MyEntry
 
 
-@view_config(route_name="home", renderer="../templates/home.jinja2", permission=NO_PERMISSION_REQUIRED)
+@view_config(
+    route_name="home", renderer="../templates/home.jinja2")
 def home_view(request):
     query = request.dbsession.query(MyEntry).order_by(MyEntry.creation_date.desc())
     entries = query.all()
     return {"entries": entries}
 
 
-@view_config(route_name='detail', renderer='../templates/detail.jinja2', permission=NO_PERMISSION_REQUIRED)
+@view_config(
+    route_name='detail', renderer='../templates/detail.jinja2')
 def detail_view(request):
     entry_id = int(request.matchdict['id'])
     entry = request.dbsession.query(MyEntry).get(entry_id)
@@ -24,7 +29,8 @@ def detail_view(request):
     return {"entry": entry}
 
 
-@view_config(route_name='update', renderer='../templates/edit.jinja2', permission=NO_PERMISSION_REQUIRED)
+@view_config(
+    route_name='update', renderer='../templates/edit.jinja2', permission='private')
 def edit_view(request):
     entry_id = int(request.matchdict['id'])
     entry = request.dbsession.query(MyEntry).get(entry_id)
@@ -38,7 +44,8 @@ def edit_view(request):
     return {"entry": entry}
 
 
-@view_config(route_name='create', renderer='../templates/create.jinja2', permission=NO_PERMISSION_REQUIRED)
+@view_config(
+    route_name='create', renderer='../templates/create.jinja2', permission='private')
 def create_view(request):
     title = body = error = ''
     if request.method == 'POST':
@@ -67,14 +74,14 @@ def login_view(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
+        if check_credentials(username, password):
+            headers = remember(request, username)
+            return HTTPFound(location=request.route_url('home'), headers=headers)
+        error = "You lack admin permissions."
     return {"error": error}
 
 
-# @view_config(route_name='private', renderer='string', permission='secret')
-# def private(request):
-#     return "I am a private view"
-#
-
-# @view_config(route_name='public', renderer='string')
-# def public(request):
-#     return "I am a public view"
+@view_config(route_name='logout')
+def logout(request):
+    headers = forget(request)
+    return HTTPFound(request.route_url('login'), headers=headers)
