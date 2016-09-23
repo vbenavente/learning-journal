@@ -77,7 +77,7 @@ def login_view(request):
         if check_credentials(username, password):
             headers = remember(request, username)
             return HTTPFound(location=request.route_url('home'), headers=headers)
-        error = "You lack admin permissions."
+        error = "You lack editing permissions, but can still view the page."
     return {"error": error}
 
 
