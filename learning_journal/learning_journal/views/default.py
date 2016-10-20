@@ -6,7 +6,6 @@ from pyramid.security import NO_PERMISSION_REQUIRED
 from pyramid.security import remember, forget
 from learning_journal.security import check_credentials
 import datetime
-import os
 
 from ..models import MyEntry
 
