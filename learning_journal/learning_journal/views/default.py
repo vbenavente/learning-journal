@@ -13,7 +13,9 @@ from ..models import MyEntry
 @view_config(
     route_name="home", renderer="../templates/home.jinja2")
 def home_view(request):
-    query = request.dbsession.query(MyEntry).order_by(MyEntry.creation_date.desc())
+    query = request.dbsession.query(MyEntry).order_by(
+        MyEntry.creation_date.desc()
+        )
     entries = query.all()
     return {"entries": entries}
 
@@ -29,7 +31,10 @@ def detail_view(request):
 
 
 @view_config(
-    route_name='update', renderer='../templates/edit.jinja2', permission='private')
+    route_name='update',
+    renderer='../templates/edit.jinja2',
+    permission='private'
+    )
 def edit_view(request):
     entry_id = int(request.matchdict['id'])
     entry = request.dbsession.query(MyEntry).get(entry_id)
@@ -38,13 +43,19 @@ def edit_view(request):
     if request.method == "POST":
         entry.title = request.POST["title"]
         entry.body = request.POST["body"]
-        entry = MyEntry(title=entry.title, body=entry.body, creation_date=entry.creation_date)
+        entry = MyEntry(
+            title=entry.title,
+            body=entry.body,
+            creation_date=entry.creation_date
+            )
         return HTTPFound(location=request.route_url('home'))
     return {"entry": entry}
 
 
 @view_config(
-    route_name='create', renderer='../templates/create.jinja2', permission='private')
+    route_name='create',
+    renderer='../templates/create.jinja2',
+    permission='private')
 def create_view(request):
     title = body = error = ''
     if request.method == 'POST':
@@ -56,13 +67,23 @@ def create_view(request):
         new_title = request.POST["title"]
         new_body = request.POST["body"]
         new_creation_date = datetime.datetime.utcnow()
-        new_entry = MyEntry(title=new_title, body=new_body, creation_date=new_creation_date)
+        new_entry = MyEntry(
+            title=new_title,
+            body=new_body,
+            creation_date=new_creation_date
+            )
         request.dbsession.add(new_entry)
-        return HTTPFound(location=request.route_url('home'))  # credit Cris Ewing
+        return HTTPFound(
+            location=request.route_url('home')
+            )  # credit Cris Ewing
     return {"title": title, "body": body, "error": error}
 
 
-@view_config(route_name='login', renderer='../templates/login.jinja2', permission=NO_PERMISSION_REQUIRED)
+@view_config(
+    route_name='login',
+    renderer='../templates/login.jinja2',
+    permission=NO_PERMISSION_REQUIRED
+    )
 def login_view(request):
     username = password = error = ""
     if request.method == "POST":
@@ -75,7 +96,10 @@ def login_view(request):
         password = request.POST["password"]
         if check_credentials(username, password):
             headers = remember(request, username)
-            return HTTPFound(location=request.route_url('home'), headers=headers)
+            return HTTPFound(
+                location=request.route_url('home'),
+                headers=headers
+                )
         error = "You lack editing permissions, but can still view the page."
     return {"error": error}
 

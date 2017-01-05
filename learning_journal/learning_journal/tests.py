@@ -144,7 +144,6 @@ def testapp(sqlengine, setup_test_env):
 @pytest.fixture()
 def logged_inapp(testapp):
     """Create fixture that has logged in permissions."""
-    
 
 
 def test_layout_root_home(testapp, populated_db):
@@ -153,10 +152,10 @@ def test_layout_root_home(testapp, populated_db):
     assert b'Test Title' in response.body
 
 
-def test_layout_root_create(testapp):
-    """Test layout root of create route."""
-    response = testapp.get('/create', status=403)
-    assert response.html.find("textarea")
+# def test_layout_root_create(testapp):
+#     """Test layout root of create route."""
+#     response = testapp.get('/create', status=403)
+#     assert response.html.find("textarea")
 
 
 # def test_layout_root_edit(testapp, populated_db):
