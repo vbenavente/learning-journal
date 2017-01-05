@@ -26,6 +26,10 @@ body {
     line-height: 20px;
 }
 
+.login {
+  float: right;
+}
+
 main {
   overflow: hidden;
 }

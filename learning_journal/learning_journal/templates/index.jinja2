@@ -14,6 +14,12 @@
           <section class="container">
             <a class="navbar-brand" href="{{ request.route_url('home') }}">Home</a>
             <a class="navbar-brand" href="{{ request.route_url('create') }}">Entry +</a>
+            <a class="navbar-brand login" href="{{ request.route_url('login') }}">Login</a>
+            <a class="navbar-brand login" href="{{ request.route_url('logout') }}">Logout</a>
+            <div>
+              {% block navbar %}
+              {% endblock %}
+            </div>
           </section>
         </nav>
       </div>
